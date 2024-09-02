@@ -20,7 +20,7 @@ const LoginForm = () => {
           Welcome to Alap.
         </h2>
         <h2 className="mb-8 text-xl text-cyan-900">
-          Sign in here with your credentials.
+          Sign in with your credentials.
         </h2>
       </div>
       <div className="mt-16 grid space-y-4">
@@ -65,7 +65,7 @@ const LoginForm = () => {
         <p className="text-sm text-gray-700">
           New to Alap?{" "}
           <Link href="/auth/signup" className="text-blue-600 hover:underline">
-            Register Here
+            Register Now
           </Link>
         </p>
       </div>

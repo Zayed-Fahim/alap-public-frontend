@@ -17,7 +17,7 @@ const ForgotPasswordTemplate = () => {
                 className="text-blue-600 decoration-2 hover:underline"
                 href="/auth/login"
               >
-                Login Here
+                Login
               </Link>
             </p>
           </div>
