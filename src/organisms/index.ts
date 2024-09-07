@@ -3,3 +3,8 @@ export { default as SignUpForm } from "./SignUpForm";
 export { default as ResetPasswordForm } from "./RestPasswordForm";
 export { default as ForgotPasswordForm } from "./ForgotPasswordForm";
 export { default as AccountActivation } from "./AccountActivation";
+export { default as Sidebar } from "./Sidebar";
+export { default as Chats } from "./Chats";
+export { default as Messages } from "./Messages";
+export { default as UserProfile } from "./UserProfile";
+export { default as ChatWindow } from "./ChatWindow";

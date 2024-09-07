@@ -10,6 +10,7 @@ const RestPasswordForm = () => {
         name="password"
         id="password"
         placeholder="Enter new password"
+        className="w-full h-12 px-6 text-gray-700 placeholder-gray-400 bg-white border-2 border-gray-300 rounded-full transition duration-300 focus:border-blue-400 focus:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50"
       />
       <FormField
         label="Confirm New Password"
@@ -17,6 +18,7 @@ const RestPasswordForm = () => {
         name="confirmNewPassword"
         id="confirmNewPassword"
         placeholder="Confirm new password"
+        className="w-full h-12 px-6 text-gray-700 placeholder-gray-400 bg-white border-2 border-gray-300 rounded-full transition duration-300 focus:border-blue-400 focus:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50"
       />
 
       <Button

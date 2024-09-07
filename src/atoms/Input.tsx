@@ -6,8 +6,10 @@ interface InputProps {
   id: string;
   placeholder: string;
   value?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   className?: string;
+  required?: boolean;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -16,8 +18,10 @@ const Input: React.FC<InputProps> = ({
   id,
   placeholder,
   value,
-  onChange,
   className,
+  required,
+  onChange,
+  onBlur,
 }) => {
   return (
     <input
@@ -25,9 +29,11 @@ const Input: React.FC<InputProps> = ({
       name={name}
       id={id}
       value={value}
-      onChange={onChange}
+      required={required}
       placeholder={placeholder}
-      className={`block w-full h-12 px-6 text-gray-700 placeholder-gray-400 bg-white border-2 border-gray-300 rounded-full transition duration-300 focus:border-blue-400 focus:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 ${className}`}
+      onBlur={onBlur}
+      onChange={onChange}
+      className={className}
     />
   );
 };

@@ -8,8 +8,11 @@ interface FormFieldProps {
   name: string;
   id: string;
   placeholder: string;
+  className?: string;
   value?: string;
+  required?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
 
 const FormField: React.FC<FormFieldProps> = ({
@@ -19,7 +22,10 @@ const FormField: React.FC<FormFieldProps> = ({
   id,
   placeholder,
   value,
+  required,
+  className,
   onChange,
+  onBlur,
 }) => {
   return (
     <div>
@@ -30,10 +36,12 @@ const FormField: React.FC<FormFieldProps> = ({
         type={type}
         name={name}
         id={id}
+        required={required}
         placeholder={placeholder}
         value={value}
+        className={className}
+        onBlur={onBlur}
         onChange={onChange}
-        className=""
       />
     </div>
   );
