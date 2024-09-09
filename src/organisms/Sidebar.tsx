@@ -5,7 +5,16 @@ import { TbMessageCircleFilled } from "react-icons/tb";
 import { AiFillMessage } from "react-icons/ai";
 import { RiArchiveFill } from "react-icons/ri";
 
-const Sidebar = () => {
+const Sidebar = ({
+  setTabName,
+  tabName,
+}: {
+  tabName: string;
+  setTabName: (name: string) => void;
+}) => {
+  const handleTabChange = (tabName: string) => {
+    setTabName(tabName);
+  };
   return (
     <div className="w-[4%] h-screen bg-[#444444] bg-opacity-5 flex flex-col justify-between items-center">
       <div className="flex flex-col">
@@ -22,19 +31,28 @@ const Sidebar = () => {
         </div>
         <div className="w-full flex flex-col gap-2 justify-center items-center">
           <Button
-            className="py-2.5 px-4 hover:bg-black hover:bg-opacity-10 rounded-md"
+            onClick={() => handleTabChange("Chats")}
+            className={`py-2.5 px-4 rounded-md ${
+              tabName === "Chats" && "bg-black bg-opacity-10"
+            }`}
             title="Chats"
           >
             <TbMessageCircleFilled className="w-6 h-6" />
           </Button>
           <Button
-            className="py-2.5 px-4 hover:bg-black hover:bg-opacity-10 rounded-md"
+            onClick={() => handleTabChange("Requests")}
+            className={`py-2.5 px-4 rounded-md ${
+              tabName === "Requests" && "bg-black bg-opacity-10"
+            }`}
             title="Requests"
           >
             <AiFillMessage className="w-6 h-6" />
           </Button>
           <Button
-            className="py-2.5 px-4 hover:bg-black hover:bg-opacity-10 rounded-md"
+            onClick={() => handleTabChange("Archived")}
+            className={`py-2.5 px-4 rounded-md ${
+              tabName === "Archived" && "bg-black bg-opacity-10"
+            }`}
             title="Archived"
           >
             <RiArchiveFill className="w-6 h-6" />

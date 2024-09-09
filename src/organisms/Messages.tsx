@@ -4,7 +4,7 @@ import { ChatWindow } from "@/organisms";
 import { useState } from "react";
 
 const Messages = () => {
-  const [receiver, setReceiver] = useState<boolean>(false);
+  const [receiver, setReceiver] = useState<boolean>(true);
 
   return (
     <div className="w-[70%] bg-[#80C4E9] flex justify-center items-center text-center">

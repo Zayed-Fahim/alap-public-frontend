@@ -1,11 +1,12 @@
 "use client";
 
-import { Button, Logo } from "@/atoms";
+import { Button, ConfirmationMessage, Logo } from "@/atoms";
 import { FormField, SocialLoginButton } from "@/molecules";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
+import { VscEye, VscEyeClosed } from "react-icons/vsc";
 
 interface ILogin {
   email: string;
@@ -13,29 +14,28 @@ interface ILogin {
 }
 
 const LoginForm = () => {
-  const [credentials, setCredentials] = useState<ILogin>({
-    email: "",
-    password: "",
-  });
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
   const router = useRouter();
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setCredentials((prev) => ({ ...prev, [name]: value }));
-  };
 
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const result = await signIn("credentials", {
-      ...credentials,
-      redirect: true,
-      callbackUrl: "/users/me",
+      email,
+      password,
+      redirect: false,
     });
-
     if (result?.error) {
-      setError("Invalid credentials!");
+      setError("Incorrect Email or Password!");
+      return;
     }
+    router.push("/users/@me");
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -70,27 +70,48 @@ const LoginForm = () => {
       </div>
 
       <form onSubmit={handleFormSubmit} className="flex flex-col gap-3">
-        <FormField
-          label="Email Address"
-          type="email"
-          name="email"
-          id="email"
-          required={true}
-          placeholder="example@example.com"
-          onChange={handleInputChange}
-          className="w-full h-12 px-6 text-gray-700 placeholder-gray-400 bg-white border-2 border-gray-300 rounded-full transition duration-300 focus:border-blue-400 focus:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50"
-        />
-        <FormField
-          label="Password"
-          type="password"
-          name="password"
-          id="password"
-          required={true}
-          placeholder="Your Password"
-          onChange={handleInputChange}
-          className="w-full h-12 px-6 text-gray-700 placeholder-gray-400 bg-white border-2 border-gray-300 rounded-full transition duration-300 focus:border-blue-400 focus:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50"
-        />
-        {error && <p className="text-red-500 text-sm">{error}</p>}
+        <>
+          <FormField
+            label="Email Address"
+            type="email"
+            name="email"
+            id="email"
+            required={true}
+            placeholder="example@example.com"
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              setEmail(e.target.value);
+              setError("");
+            }}
+            className="w-full h-12 px-6 text-gray-700 placeholder-gray-400 bg-white border-2 border-gray-300 rounded-full transition duration-300 focus:border-blue-400 focus:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50"
+          />
+        </>
+        <div className="relative">
+          <FormField
+            label="Password"
+            type={showPassword ? "text" : "password"}
+            name="password"
+            id="password"
+            required={true}
+            placeholder="Your Password"
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              setPassword(e.target.value);
+              setError("");
+            }}
+            className="w-full h-12 px-6 text-gray-700 placeholder-gray-400 bg-white border-2 border-gray-300 rounded-full transition duration-300 focus:border-blue-400 focus:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50"
+          />
+          <Button
+            type="button"
+            onClick={togglePasswordVisibility}
+            className="absolute right-5 top-1/2 flex justify-center items-center"
+          >
+            {showPassword ? (
+              <VscEyeClosed className="w-6 h-6 text-gray-500" />
+            ) : (
+              <VscEye className="w-6 h-6 text-gray-500" />
+            )}
+          </Button>
+        </div>
+        {error && <ConfirmationMessage type="error" message={error} />}
         <Button
           type="submit"
           className="w-full mt-6 group h-12 px-6 bg-[#387DB2] hover:bg-opacity-90 text-white text-xl font-semibold rounded-full transition duration-300"

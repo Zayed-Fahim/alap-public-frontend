@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Logo, Message } from "@/atoms";
+import { Button, Logo, ConfirmationMessage } from "@/atoms";
 import { FormField } from "@/molecules";
 import { nameRegex, passwordRegex } from "@/utils/validation";
 import axios from "axios";
@@ -38,8 +38,8 @@ const SignUpForm: React.FC = () => {
     confirmPassword: "",
   });
 
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
@@ -181,7 +181,9 @@ const SignUpForm: React.FC = () => {
             onChange={handleInputChange}
             className="w-full h-12 px-6 text-gray-700 placeholder-gray-400 bg-white border-2 border-gray-300 rounded-full transition duration-300 focus:border-blue-400 focus:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50"
           />
-          {errors.name && <Message type="error" message={errors.name} />}
+          {errors.name && (
+            <ConfirmationMessage type="error" message={errors.name} />
+          )}
         </>
         <>
           <FormField
@@ -195,7 +197,9 @@ const SignUpForm: React.FC = () => {
             onBlur={handleCheckMail}
             className="w-full h-12 px-6 text-gray-700 placeholder-gray-400 bg-white border-2 border-gray-300 rounded-full transition duration-300 focus:border-blue-400 focus:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50"
           />
-          {errors.email && <Message type="error" message={errors.email} />}
+          {errors.email && (
+            <ConfirmationMessage type="error" message={errors.email} />
+          )}
         </>
 
         <div className="relative">
@@ -221,7 +225,7 @@ const SignUpForm: React.FC = () => {
             )}
           </Button>
           {errors.password && (
-            <Message type="error" message={errors?.password} />
+            <ConfirmationMessage type="error" message={errors?.password} />
           )}
         </div>
 
@@ -248,14 +252,19 @@ const SignUpForm: React.FC = () => {
             )}
           </Button>
           {errors.confirmPassword && (
-            <Message type="error" message={errors?.confirmPassword} />
+            <ConfirmationMessage
+              type="error"
+              message={errors?.confirmPassword}
+            />
           )}
         </div>
 
         <>
-          {errorMessage && <Message type="error" message={errorMessage} />}
+          {errorMessage && (
+            <ConfirmationMessage type="error" message={errorMessage} />
+          )}
           {successMessage && (
-            <Message type="success" message={successMessage} />
+            <ConfirmationMessage type="success" message={successMessage} />
           )}
           <Button
             type="submit"
