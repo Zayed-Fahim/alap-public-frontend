@@ -1,37 +1,72 @@
 "use client";
 
-import { Button, ConfirmationMessage, Logo } from "@/atoms";
+import { Button, ConfirmationMessage, GlobalLoader, Logo } from "@/atoms";
 import { FormField, SocialLoginButton } from "@/molecules";
+import { emailRegex } from "@/utils/validation";
+import axios from "axios";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
 
-interface ILogin {
-  email: string;
-  password: string;
-}
-
 const LoginForm = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [emailError, setEmailError] = useState<string>("");
+  const [passwordError, setPasswordError] = useState<string>("");
   const [error, setError] = useState<string>("");
   const router = useRouter();
 
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const result = await signIn("credentials", {
-      email,
-      password,
-      redirect: false,
-    });
-    if (result?.error) {
-      setError("Incorrect Email or Password!");
+    setIsLoading(true);
+    setEmailError("");
+    setPasswordError("");
+    setError("");
+
+    if (!email) {
+      setEmailError("Email is required!");
+      setIsLoading(false);
       return;
     }
-    router.push("/users/@me");
+
+    if (!password) {
+      setPasswordError("Password is required!");
+      setIsLoading(false);
+      return;
+    }
+
+    if (!emailRegex.test(email)) {
+      setEmailError("Invalid email!");
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3001/auth/login-user",
+        {
+          email,
+          password,
+        }
+      );
+
+      const user = response?.data?.data;
+
+      const authenticated = await signIn("credentials", {
+        ...user,
+        redirect: false,
+      });
+
+      if (!authenticated?.error) return router.push("/users/me");
+    } catch (error: any) {
+      setError(error?.response?.data?.message[0]);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const togglePasswordVisibility = () => {
@@ -76,7 +111,6 @@ const LoginForm = () => {
             type="email"
             name="email"
             id="email"
-            required={true}
             placeholder="example@example.com"
             onChange={(e: ChangeEvent<HTMLInputElement>) => {
               setEmail(e.target.value);
@@ -84,6 +118,9 @@ const LoginForm = () => {
             }}
             className="w-full h-12 px-6 text-gray-700 placeholder-gray-400 bg-white border-2 border-gray-300 rounded-full transition duration-300 focus:border-blue-400 focus:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50"
           />
+          {emailError && (
+            <ConfirmationMessage type="error" message={emailError} />
+          )}
         </>
         <div className="relative">
           <FormField
@@ -91,7 +128,6 @@ const LoginForm = () => {
             type={showPassword ? "text" : "password"}
             name="password"
             id="password"
-            required={true}
             placeholder="Your Password"
             onChange={(e: ChangeEvent<HTMLInputElement>) => {
               setPassword(e.target.value);
@@ -110,13 +146,16 @@ const LoginForm = () => {
               <VscEye className="w-6 h-6 text-gray-500" />
             )}
           </Button>
+          {passwordError && (
+            <ConfirmationMessage type="error" message={passwordError} />
+          )}
         </div>
         {error && <ConfirmationMessage type="error" message={error} />}
         <Button
           type="submit"
           className="w-full mt-6 group h-12 px-6 bg-[#387DB2] hover:bg-opacity-90 text-white text-xl font-semibold rounded-full transition duration-300"
         >
-          Sign in
+          {!isLoading ? "Sign in" : <GlobalLoader />}
         </Button>
       </form>
 

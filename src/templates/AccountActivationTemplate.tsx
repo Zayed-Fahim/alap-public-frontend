@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "@/atoms";
+import { Button, GlobalLoader } from "@/atoms";
 import { AccountActivation } from "@/organisms";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -7,31 +7,38 @@ import { useState } from "react";
 
 const AccountActivationTemplate = ({ email, error, isValid }: any) => {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [resendMessage, setResendMessage] = useState("");
   const [activationMessage, setActivationMessage] = useState("");
 
   const handleResendMail = async (email: string) => {
+    setIsLoading(true);
     try {
       const response = await axios.post(
         "http://localhost:3001/auth/resend-account-activation-link",
         { email }
       );
       setResendMessage(response?.data?.data);
+      setIsLoading(false);
     } catch (error: any) {
+      setIsLoading(false);
       console.log({ error });
     }
   };
   const handleActiveAccount = async (email: string) => {
+    setIsLoading(true);
     try {
       const response = await axios.post(
         "http://localhost:3001/auth/activate-user-account",
         { email }
       );
       setActivationMessage(response?.data?.data);
+      setIsLoading(false);
       setTimeout(() => {
         router.push("/auth/login");
       }, 3000);
     } catch (error: any) {
+      setIsLoading;
       console.log({ error });
     }
   };
@@ -74,7 +81,7 @@ const AccountActivationTemplate = ({ email, error, isValid }: any) => {
                     onClick={() => handleResendMail(email)}
                     className="mt-6 group h-12 px-6 bg-[#387DB2] hover:bg-opacity-90 text-white font-semibold rounded-full transition duration-300"
                   >
-                    Resend Mail
+                    {!isLoading ? "Resend Mail" : <GlobalLoader />}
                   </Button>
                 )}
               </div>

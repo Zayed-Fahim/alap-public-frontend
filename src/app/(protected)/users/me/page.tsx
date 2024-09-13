@@ -1,10 +1,12 @@
+"use client";
 import UserDashboardTemplate from "@/templates/UserDashboardTemplate";
+import { SessionProvider } from "next-auth/react";
 
-const UserDashboard = async () => {
+const UserDashboard = () => {
   return (
-    <main className="w-full h-screen">
+    <SessionProvider>
       <UserDashboardTemplate />
-    </main>
+    </SessionProvider>
   );
 };
 

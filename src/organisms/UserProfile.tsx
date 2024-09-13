@@ -1,24 +1,21 @@
 import { Button, Logo } from "@/atoms";
+import { useSession } from "next-auth/react";
 import React from "react";
 
 const UserProfile = () => {
-  // Demo session
-  const session = {
-    user: {
-      username: "Zayed_Fahim",
-      email: "zayed.zaynax02@gmail.com",
-    },
-    isAuthenticated: true,
-    token: "1234567890",
-    expires: new Date(Date.now() + 3600000),
-  };
+  const { data: session } = useSession();
+  const userNameParts = session?.user?.userName
+    .split("_")
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase());
+
+  const userName = userNameParts?.join(" ");
 
   return (
     <Button className="w-full flex justify-center items-center py-2">
       <Logo
         src="/logo/user_logo.png"
         alt="User logo"
-        title={session.user.username}
+        title={userName}
         width={80}
         height={80}
         loading="lazy"

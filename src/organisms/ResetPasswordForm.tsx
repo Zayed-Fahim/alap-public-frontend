@@ -1,7 +1,7 @@
 import { Button } from "@/atoms";
 import { FormField } from "@/molecules";
 
-const RestPasswordForm = () => {
+const ResetPasswordForm = () => {
   return (
     <form className="space-y-4">
       <FormField
@@ -31,4 +31,4 @@ const RestPasswordForm = () => {
   );
 };
 
-export default RestPasswordForm;
+export default ResetPasswordForm;

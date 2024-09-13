@@ -1,7 +1,5 @@
-import axios from "axios";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { emailRegex } from "./utils/validation";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   pages: {
@@ -10,25 +8,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   session: {
     strategy: "jwt",
   },
+  secret: process.env.NEXTAUTH_SECRET,
   providers: [
     CredentialsProvider({
       name: "Credentials",
       type: "credentials",
-      authorize: async (credential: any) => {
-        if (!credential?.email || !credential.password)
-          throw new Error("Invalid credentials!");
-
-        if (credential?.email && !emailRegex.test(credential?.email))
-          throw new Error("Invalid email format!");
-
-        const response = await axios.post(
-          "http://localhost:3001/auth/login-user",
-          { email: credential?.email, password: credential?.password }
-        );
-
-        if (!response?.data?.success)
-          throw new Error(response?.data?.message[0]);
-        const user = response?.data?.data;
+      authorize: async (credentials: any) => {
+        const user = { ...credentials };
         return user;
       },
     }),

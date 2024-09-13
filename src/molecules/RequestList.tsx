@@ -1,12 +1,12 @@
 import { Button, Logo } from "@/atoms";
 import React from "react";
 import { FaCircleCheck } from "react-icons/fa6";
-import { IReceiver } from "../organisms/Chats";
 
-const RequestList = ({ receiver }: { receiver: IReceiver }) => {
+
+const RequestList = () => {
   return (
-    <div className="flex flex-col">
-      <div className="w-full flex justify-between items-center py-2.5 px-3 bg-black bg-opacity-5 cursor-pointer">
+    <div className="flex flex-col w-full items-center">
+      {/* <div className="w-full flex justify-between items-center py-2.5 px-3 bg-black bg-opacity-5 cursor-pointer">
         <div className="flex items-center w-auto gap-3.5">
           <Logo
             src={receiver?.avatar}
@@ -40,7 +40,8 @@ const RequestList = ({ receiver }: { receiver: IReceiver }) => {
             </Button>
           )}
         </div>
-      </div>
+      </div> */}
+      <p>No chat found!</p>
     </div>
   );
 };

@@ -2,7 +2,6 @@
 import { Button, Input, Logo } from "@/atoms";
 import { ChatContext } from "@/contexts";
 import { useSession } from "next-auth/react";
-import { useParams } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import { BsThreeDots } from "react-icons/bs";
 import { IoIosSearch } from "react-icons/io";
@@ -11,24 +10,11 @@ import io from "socket.io-client";
 
 const socket = io("http://localhost:3002");
 
-const ChatWindow = () => {
-  const { conversationId } = useParams();
+const NewChatWindow = () => {
   const { data: session } = useSession();
-  const { conversation, handleConversation } = useContext(ChatContext);
-  const [messages, setMessages] = useState<any[]>([]);
+  const { receiver } = useContext(ChatContext);
+  const [messages, setMessages] = useState<string[]>([]);
   const [newMessage, setNewMessage] = useState<string>("");
-
-  useEffect(() => {
-    if (conversationId) {
-      handleConversation(conversationId).then((conv: any) => {
-        if (conv && conv.messages) {
-          setMessages(conv.messages);
-        }
-      });
-    }
-  }, [conversationId]);
-
-  const receiver = conversation?.participants?.receiver;
 
   const userNameParts = receiver?.userName
     ?.split("_")
@@ -36,10 +22,11 @@ const ChatWindow = () => {
       (part: string) =>
         part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
     );
+
   const userName = userNameParts?.join(" ");
 
   useEffect(() => {
-    socket.on("receive_message", (message: any) => {
+    socket.on("receive_message", (message: string) => {
       setMessages((prevMessages) => [...prevMessages, message]);
     });
 
@@ -47,24 +34,15 @@ const ChatWindow = () => {
       socket.off("receive_message");
     };
   }, []);
-
   const payload = {
     senderId: session?.user?.id,
     receiverId: receiver?._id,
-    conversationId: conversation?.conversationId,
     content: newMessage,
   };
-
   const sendMessage = () => {
     if (newMessage) {
       socket.emit("send_message", payload);
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        {
-          senderId: session?.user?.id,
-          content: newMessage,
-        },
-      ]);
+      setMessages((prevMessages) => [...prevMessages, newMessage]);
       setNewMessage("");
     }
   };
@@ -117,22 +95,11 @@ const ChatWindow = () => {
           <p className="text-xl font-bold text-black">{userName}</p>
         </div>
         <div className="flex flex-col gap-1 px-3 justify-between items-start">
-          {messages.length > 0 ? (
-            messages.map((message: any, i) => (
-              <p
-                className={`px-3 py-2 rounded-xl ${
-                  message.senderId === session?.user?.id
-                    ? "bg-blue-200 self-end"
-                    : "bg-white"
-                }`}
-                key={i}
-              >
-                {message.content}
-              </p>
-            ))
-          ) : (
-            <p>No messages yet</p>
-          )}
+          {messages.map((message: string, i) => (
+            <p className="bg-white px-3 py-2 rounded-xl" key={i}>
+              {message}
+            </p>
+          ))}
         </div>
       </div>
       <div className="h-[7%] py-3 px-3">
@@ -140,7 +107,7 @@ const ChatWindow = () => {
           <Input
             id="message"
             name="message"
-            type="text"
+            type="test"
             value={newMessage}
             placeholder="Type a message..."
             onChange={(e) => setNewMessage(e.target.value)}
@@ -162,4 +129,4 @@ const ChatWindow = () => {
   );
 };
 
-export default ChatWindow;
+export default NewChatWindow;

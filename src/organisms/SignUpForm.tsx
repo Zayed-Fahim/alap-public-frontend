@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Logo, ConfirmationMessage } from "@/atoms";
+import { Button, Logo, ConfirmationMessage, GlobalLoader } from "@/atoms";
 import { FormField } from "@/molecules";
 import { nameRegex, passwordRegex } from "@/utils/validation";
 import axios from "axios";
@@ -25,6 +25,7 @@ interface FormErrors {
 }
 
 const SignUpForm: React.FC = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [formState, setFormState] = useState<FormState>({
     name: "",
     email: "",
@@ -39,7 +40,8 @@ const SignUpForm: React.FC = () => {
   });
 
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
+  const [showConfirmPassword, setShowConfirmPassword] =
+    useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
@@ -126,7 +128,7 @@ const SignUpForm: React.FC = () => {
   const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!validateForm()) return;
-
+    setIsLoading(true);
     try {
       const response = await axios.post(
         "http://localhost:3001/auth/create-user",
@@ -134,15 +136,16 @@ const SignUpForm: React.FC = () => {
           email: formState.email,
           userName: formState.name,
           password: formState.password,
-          cPassword: formState.confirmPassword,
         }
       );
       if (response?.data?.success) {
         setSuccessMessage(response?.data?.data);
         setIsSubmitted(true);
+        setIsLoading(false);
       }
     } catch (error: any) {
       setErrorMessage(error?.response?.data?.message[0]);
+      setIsLoading(false);
     }
   };
 
@@ -270,7 +273,7 @@ const SignUpForm: React.FC = () => {
             type="submit"
             className="w-full mt-6 group h-12 px-6 bg-[#387DB2] hover:bg-opacity-90 text-white text-xl font-semibold rounded-full transition duration-300"
           >
-            Sign Up
+            {!isLoading ? "Sign Up" : <GlobalLoader />}
           </Button>
         </>
       </form>

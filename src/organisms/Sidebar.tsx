@@ -1,22 +1,19 @@
-import React from "react";
+"use client";
+import React, { useContext } from "react";
 import { UserProfile } from "@/organisms";
 import { Button, Logo } from "@/atoms";
 import { TbMessageCircleFilled } from "react-icons/tb";
 import { AiFillMessage } from "react-icons/ai";
 import { RiArchiveFill } from "react-icons/ri";
+import { CommonContext } from "@/contexts";
 
-const Sidebar = ({
-  setTabName,
-  tabName,
-}: {
-  tabName: string;
-  setTabName: (name: string) => void;
-}) => {
+const Sidebar = () => {
+  const { setTabName, tabName } = useContext(CommonContext);
   const handleTabChange = (tabName: string) => {
     setTabName(tabName);
   };
   return (
-    <div className="w-[4%] h-screen bg-[#444444] bg-opacity-5 flex flex-col justify-between items-center">
+    <div className="relative w-[4%] h-screen bg-[#444444] bg-opacity-5 flex flex-col justify-between items-center">
       <div className="flex flex-col">
         <div className="flex justify-center items-center">
           <Logo
