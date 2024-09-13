@@ -9,14 +9,22 @@ import { IoIosSearch } from "react-icons/io";
 import { IoSend } from "react-icons/io5";
 import io from "socket.io-client";
 
-const socket = io("http://localhost:3002");
+let socket: any;
 
 const ChatWindow = () => {
   const { conversationId } = useParams();
   const { data: session } = useSession();
-  const { conversation, handleConversation } = useContext(ChatContext);
+  const { conversation, handleConversation, setChatList, handleChatList } =
+    useContext(ChatContext);
   const [messages, setMessages] = useState<any[]>([]);
   const [newMessage, setNewMessage] = useState<string>("");
+
+  useEffect(() => {
+    socket = io("http://localhost:3002");
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
 
   useEffect(() => {
     if (conversationId) {
@@ -26,16 +34,25 @@ const ChatWindow = () => {
         }
       });
     }
-  }, [conversationId]);
+  }, [handleConversation, conversationId]);
 
   const receiver = conversation?.participants?.receiver;
+  const sender = conversation?.participants?.sender;
 
-  const userNameParts = receiver?.userName
-    ?.split("_")
-    .map(
-      (part: string) =>
-        part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
-    );
+  const userNameParts =
+    session?.user?.id === sender?._id
+      ? receiver?.userName
+          ?.split("_")
+          .map(
+            (part: string) =>
+              part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
+          )
+      : sender?.userName
+          ?.split("_")
+          .map(
+            (part: string) =>
+              part.charAt(0).toUpperCase() + part.slice(1).toLowerCase()
+          );
   const userName = userNameParts?.join(" ");
 
   useEffect(() => {
@@ -48,24 +65,21 @@ const ChatWindow = () => {
     };
   }, []);
 
-  const payload = {
-    senderId: session?.user?.id,
-    receiverId: receiver?._id,
-    conversationId: conversation?.conversationId,
-    content: newMessage,
-  };
-
-  const sendMessage = () => {
+  const sendMessage = async () => {
     if (newMessage) {
+      const payload = {
+        senderId: session?.user?.id,
+        receiverId:
+          session?.user?.id === sender?._id ? receiver?._id : sender?._id,
+        content: newMessage,
+        conversationId,
+      };
+
       socket.emit("send_message", payload);
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        {
-          senderId: session?.user?.id,
-          content: newMessage,
-        },
-      ]);
+      setMessages([...messages, payload]);
+
       setNewMessage("");
+      handleChatList(session?.user?.id);
     }
   };
 
@@ -104,7 +118,7 @@ const ChatWindow = () => {
           </div>
         </div>
       </div>
-      <div className="h-[calc(100%-16%)] w-full flex flex-col gap-3 text-black overflow-y-auto">
+      <div className="h-[calc(100%-16%)] w-full flex flex-col gap-3 text-black overflow-y-scroll scrollbar">
         <div className="flex flex-col items-center gap-3 py-10">
           <Logo
             src={receiver?.avatar || "/logo/user_logo.png"}
@@ -117,17 +131,17 @@ const ChatWindow = () => {
           <p className="text-xl font-bold text-black">{userName}</p>
         </div>
         <div className="flex flex-col gap-1 px-3 justify-between items-start">
-          {messages.length > 0 ? (
-            messages.map((message: any, i) => (
+          {messages?.length > 0 ? (
+            messages?.map((message: any, i) => (
               <p
-                className={`px-3 py-2 rounded-xl ${
+                className={`px-3 py-2 rounded-xl text-left ${
                   message.senderId === session?.user?.id
                     ? "bg-blue-200 self-end"
                     : "bg-white"
                 }`}
                 key={i}
               >
-                {message.content}
+                {message?.content}
               </p>
             ))
           ) : (

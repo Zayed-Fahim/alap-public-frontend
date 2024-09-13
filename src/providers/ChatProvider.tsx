@@ -38,7 +38,7 @@ const ChatProvider: React.FC<IChatProvider> = ({ children }) => {
         "http://localhost:3002/communication/users",
         { id }
       );
-      return response?.data?.data;
+      return response?.data?.data || [];
     } catch (error) {
       console.error("Error fetching chat users:", error);
       return [];
@@ -49,11 +49,11 @@ const ChatProvider: React.FC<IChatProvider> = ({ children }) => {
     try {
       const response = await axios.post(
         "http://localhost:3002/conversation/all",
-        {
-          id,
-        }
+        { id }
       );
-      return response.data.data;
+      const chatData = response.data.data;
+      setChatList(chatData);
+      return chatData;
     } catch (error) {
       console.error("Error fetching chat list:", error);
     }
