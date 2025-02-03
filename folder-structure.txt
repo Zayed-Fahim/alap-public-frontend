@@ -1,0 +1,61 @@
+.
+├── .husky/
+│   ├── pre-commit
+│   └── commit-msg
+├── analyze/
+│   ├── nodejs.html
+├── public/
+│   ├── images/
+│   │   ├── hero.jpg
+│   │   └── feature.png
+│   ├── icons/
+│   │   ├── logo.svg
+│   │   └── favicon.ico
+│   └── fonts/
+│       ├── roboto-regular.woff2
+│       └── poppins-bold.woff2
+src/
+├── app/
+│   ├── (Home)/
+│   │   ├── (auth)/
+│   │   │   └── login/
+│   │   │       └── page.tsx
+│   │   ├── page.tsx  
+│   │   ├── layout.tsx
+│   │   └── not-found.tsx
+│   ├── (Protected)/
+│   │   └── inbox/
+│   │       └── page.tsx
+├── components/
+│   ├── features/
+│   │   └── users/
+│   │       └── user-profile.tsx
+│   └── layout/
+│       ├── Header.tsx
+│       └── ui/
+│           └── button.tsx
+├── config/
+│   ├── env.ts
+│   └── site.ts
+├── constants/
+│   ├── icons.tsx
+│   └── index.ts
+├── lib/
+│   ├── api/
+│   ├── auth/
+│   ├── hooks/
+│   ├── utils/
+│   └── validators/
+├── middleware/
+│   └── auth.ts
+├── stories/
+├── styles/
+│   └── globals.css
+└── types/
+    └── user.d.ts
+├── .env.local
+├── next.config.js
+├── tailwind.config.js
+├── tsconfig.json
+├── prettier.config.js
+└── package.json
