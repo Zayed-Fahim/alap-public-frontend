@@ -1,14 +1,13 @@
 /** @type {import('next').NextConfig} */
+import bundleAnalyzer from '@next/bundle-analyzer';
+
+const withBundleAnalyzer = bundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true'
+});
+
 const nextConfig = {
-  async redirects() {
-    return [
-      {
-        source: "/",
-        destination: "/auth/login",
-        permanent: true, // Set to `true` if this is a permanent redirect
-      },
-    ];
-  },
+  reactStrictMode: true,
+  poweredByHeader: false
 };
 
-export default nextConfig;
+export default withBundleAnalyzer(nextConfig);
