@@ -9,7 +9,7 @@ export const Navigation: React.FC = () => {
         <CustomLink
           key={item.id}
           href={item.href}
-          className="text-primary-text font-medium leading-normal transition-colors hover:text-[#607AFB]"
+          className="text-primary-text font-medium leading-normal transition-colors hover:text-primary"
         >
           {item.label}
         </CustomLink>

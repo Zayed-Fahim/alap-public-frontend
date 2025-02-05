@@ -11,7 +11,7 @@ export const Footer = () => {
               <CustomLink
                 key={index}
                 href={link?.href}
-                className="text-footer text-base font-normal leading-normal"
+                className="text-secondary-text text-base font-normal leading-normal"
               >
                 {link?.label}
               </CustomLink>
@@ -21,13 +21,16 @@ export const Footer = () => {
           <div className="flex flex-wrap justify-center gap-4">
             {SOCIAL_MEDIA_LINKS.map((link, index) => (
               <CustomLink key={index} href={link?.href}>
-                <div className="text-footer size-6" data-icon={link?.name}>
+                <div
+                  className="text-secondary-text size-6"
+                  data-icon={link?.name}
+                >
                   {link?.icon}
                 </div>
               </CustomLink>
             ))}
           </div>
-          <p className="text-footer text-base font-normal leading-normal">
+          <p className="text-secondary-text text-base font-normal leading-normal">
             @ {new Date().getFullYear()} Alap Inc.
           </p>
         </footer>

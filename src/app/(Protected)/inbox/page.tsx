@@ -1,7 +1,4 @@
-import React from 'react';
-
-const Inbox = () => {
+const Home = () => {
   return <div></div>;
 };
-
-export default Inbox;
+export default Home;
