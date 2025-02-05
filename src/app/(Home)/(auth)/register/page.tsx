@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Inbox = () => {
+const Register = () => {
   return <div></div>;
 };
 
-export default Inbox;
+export default Register;

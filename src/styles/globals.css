@@ -5,12 +5,22 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary-color: #2884e6;
+  --secondary-color: #e7edf3;
+  --primary-text-color: #0e141b;
+  --secondary-text-color: #f8fafc;
+  --primary-border-color: #e7edf3;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #ffffff;
+    --foreground: #171717;
+    --primary-color: #2884e6;
+    --secondary-color: #e7edf3;
+    --primary-text-color: #0e141b;
+    --secondary-text-color: #f8fafc;
+    --primary-border-color: #e7edf3;
   }
 }
 

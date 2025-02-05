@@ -27,7 +27,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "next.config.mjs"
-, "commitlint.config.mts"  ],
+    "next.config.mjs",
+    "commitlint.config.mts"
+  ],
   "exclude": ["node_modules"]
 }
