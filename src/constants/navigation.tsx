@@ -12,11 +12,6 @@ export const FOOTER_NAV_ITEMS = [
   { label: 'Blog', href: '#blog', id: 'blog' },
   { label: 'Press', href: '#press', id: 'press' },
   { label: 'Investors', href: '#investors', id: 'investors' },
-  {
-    label: 'Alap for Good',
-    href: '#alap-for-good',
-    id: 'alap-for-good'
-  },
   { label: 'Security', href: '#security', id: 'security' },
   { label: 'Developers', href: '#developers', id: 'developers' },
   { label: 'Partners', href: '#partners', id: 'partners' },
