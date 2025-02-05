@@ -1,6 +1,5 @@
 import { CustomLink } from '@/components/ui';
 import { FOOTER_NAV_ITEMS, SOCIAL_MEDIA_LINKS } from '@/constants/navigation';
-import React from 'react';
 
 export const Footer = () => {
   return (
@@ -21,9 +20,9 @@ export const Footer = () => {
 
           <div className="flex flex-wrap justify-center gap-4">
             {SOCIAL_MEDIA_LINKS.map((link, index) => (
-              <CustomLink key={index} href={link.href}>
-                <div className="text-footer size-6" data-icon={link.name}>
-                  {link.icon}
+              <CustomLink key={index} href={link?.href}>
+                <div className="text-footer size-6" data-icon={link?.name}>
+                  {link?.icon}
                 </div>
               </CustomLink>
             ))}
