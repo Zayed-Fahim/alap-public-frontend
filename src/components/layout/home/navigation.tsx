@@ -6,7 +6,11 @@ export const Navigation: React.FC = () => {
   return (
     <nav className="flex items-center gap-9">
       {NAV_ITEMS.map((item) => (
-        <CustomLink key={item.id} href={item.href}>
+        <CustomLink
+          key={item.id}
+          href={item.href}
+          className="text-primary-text font-medium leading-normal transition-colors hover:text-[#607AFB]"
+        >
           {item.label}
         </CustomLink>
       ))}

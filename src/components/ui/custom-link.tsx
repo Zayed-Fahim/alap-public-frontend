@@ -13,13 +13,7 @@ export const CustomLink: React.FC<CustomLinkProps> = ({
   className
 }) => {
   return (
-    <Link
-      href={href}
-      className={cn(
-        'text-primary-text font-medium leading-normal transition-colors hover:text-[#607AFB]',
-        className
-      )}
-    >
+    <Link href={href} className={cn(className)}>
       {children}
     </Link>
   );

@@ -15,6 +15,7 @@ export default {
         secondary: 'var(--secondary-color)',
         'primary-text': 'var(--primary-text-color)',
         'secondary-text': 'var(--secondary-text-color)',
+        footer: 'var(--footer-text-color)',
         'primary-border': 'var(--primary-border-color)'
       }
     }
