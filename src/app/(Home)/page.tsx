@@ -1,7 +1,10 @@
-import React from 'react';
+import { Hero } from '@/components/features/home';
 
-const Inbox = () => {
-  return <div></div>;
+const Home = () => {
+  return (
+    <div className="conatiner mx-auto max-w-[960px] py-5">
+      <Hero />
+    </div>
+  );
 };
-
-export default Inbox;
+export default Home;

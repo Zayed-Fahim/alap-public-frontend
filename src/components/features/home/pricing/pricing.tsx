@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Inbox = () => {
+const Pricing = () => {
   return <div></div>;
 };
 
-export default Inbox;
+export default Pricing;
