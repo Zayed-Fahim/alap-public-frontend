@@ -1,5 +1,8 @@
 export const lintStagedConfig = {
-  '**/*.(ts|tsx|js)': ['yarn eslint --cache --fix', 'yarn prettier --write'],
-  '**/*.(md|json)': 'yarn prettier --write',
-  '**/*.(ts|tsx)': 'yarn tsc --noEmit'
+  '*.{js,jsx,ts,tsx}': [
+    'eslint --fix',
+    'prettier --write',
+    'tsc-files --noEmit'
+  ],
+  '*.{md,json}': 'prettier --write'
 };

@@ -1,4 +1,4 @@
-const commitlintConfig = {
+export const commitlintConfig = {
   extends: ['@commitlint/config-conventional'],
   rules: {
     'body-leading-blank': [2, 'always'], // Enforce blank line before body
@@ -31,8 +31,6 @@ const commitlintConfig = {
         'security',
         'changeset'
       ]
-    ] // Restrict commit types to predefined list
+    ]
   }
 };
-
-export default commitlintConfig;
