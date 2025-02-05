@@ -1,7 +1,6 @@
-import { Button } from '@/components/ui';
-import React from 'react';
+import { Button, HeadingTitle } from '@/components/ui';
 
-export const Hero = () => {
+export const Hero: React.FC = () => {
   return (
     <div className="p-4 w-full">
       <div
@@ -12,14 +11,11 @@ export const Hero = () => {
           backgroundSize: 'cover'
         }}
       >
-        <div className="flex flex-col gap-2 text-center">
-          <h1 className="text-optional-text text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]">
-            Welcome to Alap
-          </h1>
-          <h2 className="text-optional-text text-sm font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal">
-            Real-time communication for the modern workplace
-          </h2>
-        </div>
+        <HeadingTitle
+          title="Welcome to Alap"
+          subtitle="Real-time communication for modern teams"
+          className="pt-52"
+        />
 
         <Button label="Get started" variant="primary" />
       </div>

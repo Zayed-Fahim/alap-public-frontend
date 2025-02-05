@@ -1,21 +1,4 @@
-const commitTypes = Object.freeze([
-  'build',
-  'chore',
-  'ci',
-  'docs',
-  'feat',
-  'fix',
-  'perf',
-  'refactor',
-  'revert',
-  'style',
-  'test',
-  'translation',
-  'security',
-  'changeset'
-]);
-
-const Configuration = Object.freeze({
+const commitlintConfig = {
   extends: ['@commitlint/config-conventional'],
   rules: {
     'body-leading-blank': [2, 'always'], // Enforce blank line before body
@@ -29,8 +12,27 @@ const Configuration = Object.freeze({
     'subject-full-stop': [2, 'never', '.'], // No full stops at the end
     'type-case': [2, 'always', 'lower-case'], // Ensure type is lowercase
     'type-empty': [2, 'never'], // Prevent empty commit type
-    'type-enum': [2, 'always', commitTypes] // Restrict commit types to predefined list
+    'type-enum': [
+      2,
+      'always',
+      [
+        'build',
+        'chore',
+        'ci',
+        'docs',
+        'feat',
+        'fix',
+        'perf',
+        'refactor',
+        'revert',
+        'style',
+        'test',
+        'translation',
+        'security',
+        'changeset'
+      ]
+    ] // Restrict commit types to predefined list
   }
-});
+};
 
-export default Configuration;
+export default commitlintConfig;

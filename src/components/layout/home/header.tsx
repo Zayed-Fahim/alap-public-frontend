@@ -1,11 +1,10 @@
-import React from 'react';
 import { Logo } from '@/constants';
 import { Button } from '@/components/ui';
 import { Navigation } from '@/components/layout';
 
 export const Header: React.FC = () => {
   return (
-    <header className="border-b border-solid border-primary-border">
+    <header className="border-b border-solid border-primary-border sticky top-0 bg-background">
       <div className="container mx-auto max-w-[1280px] flex items-center justify-between whitespace-nowrap px-10 py-3">
         <div className="flex items-center gap-4 text-primary-text">
           <div className="size-4">
