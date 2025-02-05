@@ -23,7 +23,6 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@commitlint/types": "^19.5.0",
     "clsx": "^2.1.1",
     "next": "15.1.6",
     "react": "^19.0.0",
@@ -34,6 +33,7 @@
     "@chromatic-com/storybook": "3.2.4",
     "@commitlint/cli": "^19.7.1",
     "@commitlint/config-conventional": "^19.7.1",
+    "@commitlint/types": "^19.5.0",
     "@eslint/eslintrc": "^3",
     "@next/bundle-analyzer": "^15.1.6",
     "@storybook/addon-essentials": "8.5.3",
