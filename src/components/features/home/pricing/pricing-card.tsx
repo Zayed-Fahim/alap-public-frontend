@@ -1,6 +1,5 @@
 import { Button } from '@/components/ui';
 import { Check } from '@/constants';
-import React from 'react';
 
 interface PricingCardProps {
   title: string;
@@ -32,7 +31,7 @@ export const PricingCard: React.FC<PricingCardProps> = ({
           </span>
         </p>
       </div>
-      <Button label={buttonText} variant="secondary" />
+      <Button variant="secondary" className='h-10'>{buttonText}</Button>
       <div className="flex flex-col gap-2">
         {features?.map((feature, index) => (
           <div

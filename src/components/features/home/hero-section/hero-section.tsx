@@ -17,7 +17,7 @@ export const Hero: React.FC = () => {
           className="pt-52"
         />
 
-        <Button label="Get started" variant="primary" />
+        <Button variant="primary" className='h-10'>Get started</Button>
       </div>
     </div>
   );
