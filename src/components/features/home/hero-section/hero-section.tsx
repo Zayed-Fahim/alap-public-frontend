@@ -1,4 +1,4 @@
-import { Button, HeadingTitle } from '@/components/ui';
+import { Button, CustomLink, HeadingTitle } from '@/components/ui';
 
 export const Hero: React.FC = () => {
   return (
@@ -17,7 +17,11 @@ export const Hero: React.FC = () => {
           className="pt-52"
         />
 
-        <Button variant="primary" className='h-10'>Get started</Button>
+        <CustomLink href="/register">
+          <Button variant="primary" className="h-10">
+            Get started
+          </Button>
+        </CustomLink>
       </div>
     </div>
   );

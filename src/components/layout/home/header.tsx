@@ -20,12 +20,17 @@ export const Header: React.FC = () => {
         <div className="flex flex-1 justify-end gap-8">
           <Navigation />
           <div className="flex gap-2">
-            <Button variant="primary" className="h-10">
-              Sign in
-            </Button>
-            <Button variant="secondary" className="h-10">
-              Get started
-            </Button>
+            <CustomLink href="/login">
+              <Button variant="primary" className="h-10">
+                Sign in
+              </Button>
+            </CustomLink>
+
+            <CustomLink href="/register">
+              <Button variant="secondary" className="h-10">
+                Get started
+              </Button>
+            </CustomLink>
           </div>
         </div>
       </div>

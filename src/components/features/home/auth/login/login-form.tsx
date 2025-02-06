@@ -1,7 +1,7 @@
 import { Button, CustomLink, Input, Label, Text } from '@/components/ui';
 export const LoginForm = () => {
   return (
-    <div className="flex flex-col w-full max-w-[550px] items-center">
+    <form className="flex flex-col w-full max-w-[550px] items-center">
       <div className="w-full py-3">
         <Label htmlFor="email" className="flex flex-col w-full">
           <Text text="Email" className="pb-1 font-medium" />
@@ -50,6 +50,6 @@ export const LoginForm = () => {
         text="Or sign in with"
         className="text-secondary-text text-sm mt-4 text-center"
       />
-    </div>
+    </form>
   );
 };
