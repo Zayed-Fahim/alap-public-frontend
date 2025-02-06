@@ -1,7 +1,7 @@
 import { Button, CustomLink, Input, Label, Text } from '@/components/ui';
 import { Upload } from '@/constants';
 
-export const RegisterForm = () => {
+export const RegisterForm: React.FC = () => {
   return (
     <form className="flex flex-col w-full max-w-[550px] items-center">
       <div className="w-full py-3">
@@ -72,7 +72,9 @@ export const RegisterForm = () => {
       </div>
 
       <div className="w-full h-12 my-3">
-        <Button variant="primary" className='w-full h-full'>Sign up</Button>
+        <Button variant="primary" className="w-full h-full">
+          Sign up
+        </Button>
       </div>
 
       <div className="text-sm text-secondary-text pt-4">

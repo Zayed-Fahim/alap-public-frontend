@@ -1,8 +1,7 @@
 import { Button } from '@/components/ui';
 import { Apple, FacebookColored, Google } from '@/constants';
-import React from 'react';
 
-export const SocialAuthentication = () => {
+export const SocialAuthentication: React.FC = () => {
   return (
     <div className="flex justify-center items-center gap-x-3 py-4">
       <Button variant="secondary" className="h-10">
@@ -26,5 +25,3 @@ export const SocialAuthentication = () => {
     </div>
   );
 };
-
-
