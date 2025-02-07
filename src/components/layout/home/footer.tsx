@@ -3,7 +3,7 @@ import { FOOTER_NAV_ITEMS, SOCIAL_MEDIA_LINKS } from '@/constants/navigation';
 
 export const Footer = () => {
   return (
-    <div className="container mx-auto flex flex-1 justify-center py-5">
+    <div className=" flex justify-center">
       <div className=" flex flex-col max-w-[960px] flex-1">
         <footer className="flex flex-col gap-6 px-5 py-10 text-center">
           <div className="grid grid-cols-5 place-items-center gap-6 sm:flex-row sm:justify-around">

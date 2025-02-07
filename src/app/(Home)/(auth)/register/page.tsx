@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 const Register = () => {
   return (
-    <div className="container mx-auto max-w-[960px] py-5">
+    <>
       <div className="flex justify-center items-center max-h-[550px] p-4">
         <Image
           src="/images/home/auth/register.png"
@@ -25,7 +25,7 @@ const Register = () => {
 
         <SocialAuthentication />
       </div>
-    </div>
+    </>
   );
 };
 

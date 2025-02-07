@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 const Login = () => {
   return (
-    <div className="container mx-auto max-w-[960px] py-5">
+    <>
       <div className="flex justify-center max-h-[450px] p-4">
         <Image
           src="/images/home/auth/login.png"
@@ -25,7 +25,7 @@ const Login = () => {
 
         <SocialAuthentication />
       </div>
-    </div>
+    </>
   );
 };
 
