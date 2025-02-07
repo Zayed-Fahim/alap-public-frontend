@@ -3,3 +3,4 @@ export * from './get-started';
 export * from './pricing';
 export * from './key-features';
 export * from './auth';
+export * from './settings';

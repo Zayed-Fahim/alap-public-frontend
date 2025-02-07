@@ -22,7 +22,7 @@ export const HeadingTitle: React.FC<HeadingTitleProps> = ({
   className
 }) => {
   const titleClass = {
-    sm: 'text-xl font-semibold',
+    sm: 'text-xl font-bold',
     md: 'text-2xl font-bold',
     lg: 'text-4xl font-extrabold',
     xl: 'text-5xl font-extrabold'
