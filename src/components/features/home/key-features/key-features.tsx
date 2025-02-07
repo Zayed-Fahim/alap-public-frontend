@@ -19,7 +19,9 @@ export const KeyFeatures = () => {
             className="pb-6"
           />
 
-          <Button variant="primary" className='h-10'>View all features</Button>
+          <Button variant="primary" className="h-10">
+            View all features
+          </Button>
         </div>
 
         <div className="grid gap-x-3 gap-y-10 md:grid-cols-3 lg:grid-cols-5">

@@ -1,5 +1,4 @@
 import { Input } from '@/components/ui';
-import React from 'react';
 
 export const OtpForm: React.FC = () => {
   return (
@@ -8,7 +7,7 @@ export const OtpForm: React.FC = () => {
         <Input
           id="otp"
           key={index}
-          className="h-14 w-14 text-center border-2 border-transparent bg-secondary focus:border-2 focus:border-[#dce0e5]"
+          className="h-14 w-14 text-center bg-secondary"
           type="number"
           max={1}
           min={0}

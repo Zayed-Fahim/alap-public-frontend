@@ -12,7 +12,7 @@ export const Label: React.FC<LabelProps> = ({
   return (
     <label
       htmlFor={htmlFor}
-      className={`text-[#1C160C] text-base font-medium leading-normal ${className}`}
+      className={`text-primary-text text-base font-medium leading-normal ${className}`}
     >
       <div className="mt-1">{children}</div>
     </label>

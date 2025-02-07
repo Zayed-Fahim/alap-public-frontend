@@ -17,7 +17,7 @@ const Login = () => {
       <div className="flex flex-col justify-center items-center">
         <HeadingTitle
           title="Welcome back"
-          titleColor="text-[#1C160C]"
+          titleColor="text-primary-text"
           titleSize="md"
           className="pt-5 pb-2 w-full"
         />

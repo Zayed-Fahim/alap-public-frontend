@@ -3,8 +3,8 @@ import { HeadingTitle, Text } from '@/components/ui';
 
 const ForgotPassword: React.FC = () => {
   return (
-    <div className=" h-full lg:h-[63vh]">
-      <div className="flex flex-col py-4 flex-1">
+    <div className=" h-full lg:h-[63vh] flex justify-center">
+      <div className="flex flex-col py-4">
         <HeadingTitle
           subtitle="Enter the email address you used to sign up and we'll send you a
           link to reset your password."
@@ -20,7 +20,7 @@ const ForgotPassword: React.FC = () => {
         <Text
           text="Note: You must have access to the email address provided to
           reset your password."
-          className="text-secondary-text text-sm font-normal leading-normal pb-3 pt-1 px-4"
+          className="text-secondary-text text-sm font-normal leading-normal pb-3 pt-1"
         />
       </div>
     </div>

@@ -44,3 +44,20 @@ input[type='number'] {
   -moz-appearance: textfield;
   appearance: textfield;
 }
+
+/* Width of the scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track (background) */
+::-webkit-scrollbar-track {
+  background: var(--secondary-color);
+  border-radius: 10px;
+}
+
+/* Handle (scroll indicator) */
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 10px;
+}
