@@ -7,12 +7,12 @@ import {
 
 const Home = () => {
   return (
-    <>
+    <div>
       <Hero />
       <KeyFeatures />
       <GetStarted />
       <Pricing />
-    </>
+    </div>
   );
 };
 export default Home;
