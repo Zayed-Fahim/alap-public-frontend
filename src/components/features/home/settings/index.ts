@@ -1,2 +1,2 @@
 export * from './theme-customization';
-export * from './profile';
+export * from './setup-profile';

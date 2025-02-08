@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface IColorPalette {
   name: string;
   accent: string;

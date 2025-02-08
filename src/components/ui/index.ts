@@ -4,3 +4,6 @@ export * from './heading-title';
 export * from './input';
 export * from './label';
 export * from './Text';
+export * from './progress-bar';
+export * from './textarea';
+export * from './radio-group';

@@ -11,7 +11,7 @@ export const GetStartedForm: React.FC = () => {
             placeholder="Enter your email"
             className="rounded-r-none border-r-0 w-full h-14"
           />
-          <div className="flex items-center justify-center rounded-r-xl border-l-0 border-none bg-[#F4EFE6] pr-3">
+          <div className="flex items-center justify-center rounded-r-xl border-l-0 border-none bg-secondary pr-3">
             <Button variant="primary" className="h-10">
               View all guides
             </Button>

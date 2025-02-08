@@ -1,5 +1,4 @@
 import { Button, CustomLink, Input, Label, Text } from '@/components/ui';
-import { Upload } from '@/constants';
 
 export const RegisterForm: React.FC = () => {
   return (
@@ -46,27 +45,6 @@ export const RegisterForm: React.FC = () => {
             type="password"
             placeholder="Enter confirm password"
             className="w-full h-12"
-          />
-        </Label>
-      </div>
-
-      <div className="w-full py-3">
-        <Text text="Profile Image" className="pb-1 font-medium" />
-        <Label
-          htmlFor="image-upload"
-          className="cursor-pointer flex items-center justify-center min-w-[84px] max-w-[550px] bg-[#F4EFE6] h-12 rounded-xl"
-        >
-          <Text className="text-secondary-text">
-            <div className="flex items-center justify-center gap-3">
-              <Upload className="size-6" />
-              <span>Upload photo</span>
-            </div>
-          </Text>
-          <Input
-            type="file"
-            id="image-upload"
-            accept="image/*"
-            className="hidden"
           />
         </Label>
       </div>
