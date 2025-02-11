@@ -1,17 +1,23 @@
+'use client';
 import { RegisterForm, SocialAuthentication } from '@/components/features/home';
-import { HeadingTitle } from '@/components/ui';
-import Image from 'next/image';
+import { HeadingTitle, ImageSkeleton } from '@/components/ui';
+import { useState } from 'react';
 
 const Register = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
   return (
     <>
       <div className="flex justify-center items-center max-h-[550px] p-4">
-        <Image
+        <ImageSkeleton
           src="/images/home/auth/register.png"
           alt="Banner Image"
           width={550}
           height={550}
           className="object-cover bg-center bg-no-repeat px-4"
+          setIsLoading={setIsLoading}
+          isLoading={isLoading}
+          imageClassName="rounded-full"
         />
       </div>
       <div className="flex flex-col justify-center items-center">
