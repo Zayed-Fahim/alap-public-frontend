@@ -1,3 +1,4 @@
+import { authApolloClient } from '@/constants';
 import { graphql } from '@/gql';
 import { useMutation } from '@apollo/client';
 
@@ -10,5 +11,5 @@ const createUserDocument = graphql(`
 `);
 
 export const useCreateUser = () => {
-  return useMutation(createUserDocument);
+  return useMutation(createUserDocument, { client: authApolloClient });
 };

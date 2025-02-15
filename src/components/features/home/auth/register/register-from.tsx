@@ -8,13 +8,13 @@ import {
   Spinner,
   Text
 } from '@/components/ui';
-import { emailRegex, EyeOn, EyeOff, passwordRegex } from '@/constants';
-import { useCreateUser } from '@/hooks';
-import { IRegisterProps } from '@/types/input';
+import { emailRegex, EyeOff, EyeOn, passwordRegex } from '@/constants';
+import { AuthContext } from '@/contexts';
+import { IRegisterProps } from '@/types/auth';
 import { joiResolver } from '@hookform/resolvers/joi';
 import Joi from 'joi';
-import { useState } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useContext, useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 const schema = Joi.object({
   fullName: Joi.string().required().messages({
@@ -47,7 +47,7 @@ const schema = Joi.object({
 });
 
 export const RegisterForm: React.FC = () => {
-  const [createUser, { data, loading, error }] = useCreateUser();
+  const authContext = useContext(AuthContext);
   const [passwordVisibility, setPasswordVisibility] = useState({
     password: false,
     cPassword: false
@@ -55,8 +55,7 @@ export const RegisterForm: React.FC = () => {
   const {
     handleSubmit,
     register,
-    formState: { errors },
-    reset
+    formState: { errors }
   } = useForm<IRegisterProps>({
     resolver: joiResolver(schema),
     defaultValues: {
@@ -74,33 +73,10 @@ export const RegisterForm: React.FC = () => {
     }));
   };
 
-  const onSubmit: SubmitHandler<IRegisterProps> = async (
-    data: IRegisterProps
-  ) => {
-    try {
-      const newData = {
-        fullName: data.fullName,
-        email: data.email,
-        password: data.password
-      };
-      await createUser({
-        variables: {
-          createUserInput: {
-            ...newData
-          }
-        }
-      });
-      reset();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  console.log({ data, error });
   return (
     <form
       className="flex flex-col w-full max-w-[550px] items-center"
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(authContext!.onSubmit)}
     >
       <div className="w-full py-3">
         <Label htmlFor="name" className="flex flex-col w-full">
@@ -211,8 +187,12 @@ export const RegisterForm: React.FC = () => {
       </div>
 
       <div className="w-full h-12 my-3">
-        <Button variant="primary" className="w-full h-full" disabled={loading}>
-          {loading ? (
+        <Button
+          variant="primary"
+          className="w-full h-full"
+          disabled={authContext!.loading}
+        >
+          {authContext!.loading ? (
             <Spinner className="w-6 h-6 border-2 border-white" />
           ) : (
             'Sign up'

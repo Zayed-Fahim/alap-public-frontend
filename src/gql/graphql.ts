@@ -34,6 +34,8 @@ export type CreateUserInput = {
   email: Scalars['String']['input'];
   /** Full Name */
   fullName: Scalars['String']['input'];
+  /** Email verified or not. */
+  isEmailVerified: Scalars['Boolean']['input'];
   /** Password */
   password: Scalars['String']['input'];
 };
@@ -107,6 +109,8 @@ export type UpdateUserInput = {
   /** Full Name */
   fullName?: InputMaybe<Scalars['String']['input']>;
   id: Scalars['Int']['input'];
+  /** Email verified or not. */
+  isEmailVerified?: InputMaybe<Scalars['Boolean']['input']>;
   /** Password */
   password?: InputMaybe<Scalars['String']['input']>;
 };

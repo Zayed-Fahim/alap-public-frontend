@@ -1,10 +1,20 @@
 'use client';
-import { RegisterForm, SocialAuthentication } from '@/components/features/home';
+import {
+  RegisterForm,
+  SocialAuthentication,
+  Verification
+} from '@/components/features/home';
 import { HeadingTitle, ImageSkeleton } from '@/components/ui';
-import { useState } from 'react';
+import { AuthContext } from '@/contexts';
+import { useContext, useState } from 'react';
 
 const Register = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const authContext = useContext(AuthContext);
+
+  if (authContext!.isOtpSend) {
+    return <Verification />;
+  }
 
   return (
     <>

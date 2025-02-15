@@ -1,5 +1,5 @@
 'use client';
-import { apolloClient } from '@/constants';
+import { authApolloClient, communicationApolloClient } from '@/constants';
 import { ApolloProvider } from '@apollo/client';
 
 type IApolloClientProvider = {
@@ -9,5 +9,11 @@ type IApolloClientProvider = {
 export const ApolloClientProvider: React.FC<IApolloClientProvider> = ({
   children
 }) => {
-  return <ApolloProvider client={apolloClient}>{children}</ApolloProvider>;
+  return (
+    <ApolloProvider client={authApolloClient}>
+      <ApolloProvider client={communicationApolloClient}>
+        {children}
+      </ApolloProvider>
+    </ApolloProvider>
+  );
 };
